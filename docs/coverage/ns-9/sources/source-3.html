@@ -1,0 +1,130 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > LostView</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">astrobattle.View</a>
+</div>
+
+<h1>Coverage Summary for Class: LostView (astrobattle.View)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LostView</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    93.3%
+  </span>
+  <span class="absValue">
+    (14/15)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package astrobattle.View;
+&nbsp;
+&nbsp;import astrobattle.Controller.Utilities.Window;
+&nbsp;import com.googlecode.lanterna.TerminalPosition;
+&nbsp;import com.googlecode.lanterna.TextColor;
+&nbsp;import com.googlecode.lanterna.graphics.TextGraphics;
+&nbsp;
+<b class="nc">&nbsp;public class LostView implements View {</b>
+<b class="fc">&nbsp;    static String red = &quot;#f20c0c&quot;;</b>
+<b class="fc">&nbsp;    static String color = red;</b>
+<b class="fc">&nbsp;    static boolean change = false;</b>
+<b class="fc">&nbsp;    static String grey = &quot;#766e6e&quot;;</b>
+&nbsp;    public static void draw(TextGraphics graphics) throws InterruptedException {
+<b class="fc">&nbsp;        if(change){</b>
+<b class="fc">&nbsp;            change = false;</b>
+<b class="fc">&nbsp;            color =red;</b>
+&nbsp;        }else{
+<b class="fc">&nbsp;            change = true;</b>
+<b class="fc">&nbsp;            color = grey;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        graphics.setForegroundColor(TextColor.Factory.fromString(color));</b>
+<b class="fc">&nbsp;        graphics.putString(new TerminalPosition(Window.getCols()/2 -7 , Window.getRows()/2), &quot;Y O U   L O S T&quot;);</b>
+<b class="fc">&nbsp;        graphics.setForegroundColor(TextColor.Factory.fromString(grey));</b>
+<b class="fc">&nbsp;        graphics.putString(new TerminalPosition(Window.getCols()/2 -27 , Window.getRows()/2+2), &quot;Press [ESC] to go back to Menu or any key to play again&quot;);</b>
+<b class="fc">&nbsp;        Thread.sleep(100);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-23 18:51</div>
+</div>
+</body>
+</html>

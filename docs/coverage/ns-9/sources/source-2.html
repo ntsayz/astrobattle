@@ -1,0 +1,182 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > InstructionsView</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">astrobattle.View</a>
+</div>
+
+<h1>Coverage Summary for Class: InstructionsView (astrobattle.View)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">InstructionsView</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    98%
+  </span>
+  <span class="absValue">
+    (49/50)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package astrobattle.View;
+&nbsp;
+&nbsp;import astrobattle.Controller.Utilities.Window;
+&nbsp;
+&nbsp;import astrobattle.Model.DynamicElement.Player;
+&nbsp;import astrobattle.Model.Position;
+&nbsp;import astrobattle.View.Sprite.*;
+&nbsp;import com.googlecode.lanterna.TerminalPosition;
+&nbsp;import com.googlecode.lanterna.TextColor;
+&nbsp;import com.googlecode.lanterna.graphics.TextGraphics;
+&nbsp;
+<b class="nc">&nbsp;public class InstructionsView implements View{</b>
+&nbsp;
+<b class="fc">&nbsp;    static PlayerSprite playerSprite = new PlayerSprite();</b>
+<b class="fc">&nbsp;    static EnemySprite enemySprite = new EnemySprite();</b>
+<b class="fc">&nbsp;    static PowerUpSprite powerUpSprite = new PowerUpSprite();</b>
+<b class="fc">&nbsp;    static CoinSprite coinSprite = new CoinSprite();</b>
+<b class="fc">&nbsp;    static BulletSprite bulletSprite = new BulletSprite();</b>
+&nbsp;
+&nbsp;    public static void draw(TextGraphics graphics) {
+&nbsp;
+<b class="fc">&nbsp;        playerSprite.draw(graphics,new Player(10,38,4,4));</b>
+<b class="fc">&nbsp;        enemySprite.draw(graphics,new Position(30,38,4,4));</b>
+<b class="fc">&nbsp;        graphics.setForegroundColor(TextColor.Factory.fromString(&quot;#766e6e&quot;));</b>
+<b class="fc">&nbsp;        graphics.putString(new TerminalPosition(17,32), &quot;S H I P S&quot;);</b>
+<b class="fc">&nbsp;        graphics.putString(new TerminalPosition(15,16), &quot;B U L L E T S&quot;);</b>
+<b class="fc">&nbsp;        graphics.putString(new TerminalPosition(6,43), &quot;P L A Y E R&quot;);</b>
+<b class="fc">&nbsp;        graphics.setForegroundColor(TextColor.Factory.fromString(&quot;#ce3514&quot;));</b>
+<b class="fc">&nbsp;        graphics.putString(new TerminalPosition(28,43), &quot;E N E M Y&quot;);</b>
+<b class="fc">&nbsp;        bulletSprite.draw(graphics,11,21);</b>
+<b class="fc">&nbsp;        bulletSprite.draw(graphics,31,24);</b>
+<b class="fc">&nbsp;        graphics.setForegroundColor(TextColor.Factory.fromString(&quot;#766e6e&quot;));</b>
+<b class="fc">&nbsp;        graphics.putString(new TerminalPosition(8,24), &quot;FASTER&quot;);</b>
+<b class="fc">&nbsp;        graphics.putString(new TerminalPosition(6,25), &quot;- DAMAGE&quot;);</b>
+<b class="fc">&nbsp;        graphics.putString(new TerminalPosition(28,27), &quot;SLOWER&quot;);</b>
+<b class="fc">&nbsp;        graphics.putString(new TerminalPosition(26,28), &quot;+ DAMAGE&quot;);</b>
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;        graphics.putString(new TerminalPosition(116,32), &quot;P O W E R  U P S&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        graphics.putString(new TerminalPosition(119,16), &quot;C O I N S&quot;);</b>
+<b class="fc">&nbsp;        graphics.setForegroundColor(TextColor.Factory.fromString(&quot;#cff10c&quot;));</b>
+<b class="fc">&nbsp;        graphics.putString(new TerminalPosition(123,20), &quot;o&quot;);</b>
+<b class="fc">&nbsp;        graphics.putString(new TerminalPosition(120,21), &quot;o&quot;);</b>
+<b class="fc">&nbsp;        graphics.putString(new TerminalPosition(125,22), &quot;o&quot;);</b>
+<b class="fc">&nbsp;        graphics.putString(new TerminalPosition(122,24), &quot;o&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        graphics.setForegroundColor(TextColor.Factory.fromString(&quot;#12ee19&quot;));</b>
+<b class="fc">&nbsp;        graphics.putString(new TerminalPosition(125,36), &quot;o&quot;);</b>
+<b class="fc">&nbsp;        graphics.putString(new TerminalPosition(122,40), &quot;o&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        graphics.setForegroundColor(TextColor.Factory.fromString(&quot;#3e3837&quot;));</b>
+<b class="fc">&nbsp;        graphics.putString(new TerminalPosition(119,17), &quot;+1 POINT&quot;);</b>
+<b class="fc">&nbsp;        graphics.putString(new TerminalPosition(120,33), &quot;+ HEALTH&quot;);</b>
+&nbsp;
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;        graphics.setForegroundColor(TextColor.Factory.fromString(&quot;#766e6e&quot;));</b>
+<b class="fc">&nbsp;        graphics.putString(new TerminalPosition(Window.getCols()/2 -9 , Window.getRows()-31), &quot;[ARROW UP] MOVE UP&quot;);</b>
+<b class="fc">&nbsp;        graphics.putString(new TerminalPosition(Window.getCols()/2 - 11 , Window.getRows()-29), &quot;[ARROW DOWN] MOVE DOWN&quot;);</b>
+<b class="fc">&nbsp;        graphics.putString(new TerminalPosition(Window.getCols()/2 -11 , Window.getRows()-27), &quot;[ARROW LEFT] MOVE LEFT&quot;);</b>
+<b class="fc">&nbsp;        graphics.putString(new TerminalPosition(Window.getCols()/2 -12 , Window.getRows()-25), &quot;[ARROW RIGHT] MOVE RIGHT&quot;);</b>
+<b class="fc">&nbsp;        graphics.putString(new TerminalPosition(Window.getCols()/2 -6 , Window.getRows()-23), &quot;[TAB] SHOOT&quot;);</b>
+<b class="fc">&nbsp;        graphics.putString(new TerminalPosition(Window.getCols()/2 -13 , Window.getRows()-21), &quot;[ENTER] CHANGE BULLET TYPE&quot;);</b>
+<b class="fc">&nbsp;        graphics.putString(new TerminalPosition(Window.getCols()/2 -9 , Window.getRows()-19), &quot;[ESCAPE] PAUSE/BACK&quot;);</b>
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;        graphics.setForegroundColor(TextColor.Factory.fromString(&quot;#f20c0c&quot;));</b>
+<b class="fc">&nbsp;        graphics.putString(new TerminalPosition(Window.getCols()/2 -28 , Window.getRows()-40), &quot;D E S T R O Y&quot;);</b>
+<b class="fc">&nbsp;        graphics.setForegroundColor(TextColor.Factory.fromString(&quot;#766e6e&quot;));</b>
+<b class="fc">&nbsp;        graphics.putString(new TerminalPosition(Window.getCols()/2 -14 , Window.getRows()-40), &quot; A S  M A N Y  S H I P S  A S  Y O U  C A N&quot;);</b>
+<b class="fc">&nbsp;        graphics.putString(new TerminalPosition(Window.getCols()/2 -12 , Window.getRows()-38), &quot;A N D&quot;);</b>
+<b class="fc">&nbsp;        graphics.setForegroundColor(TextColor.Factory.fromString(&quot;#f20c0c&quot;));</b>
+<b class="fc">&nbsp;        graphics.putString(new TerminalPosition(Window.getCols()/2 - 6, Window.getRows()-38), &quot; D O  N O T  D I E&quot;);</b>
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;        graphics.putString(new TerminalPosition((Window.getCols()/2) - 7, Window.getRows()-3), &quot;RETURN TO MENU&quot;);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-23 18:51</div>
+</div>
+</body>
+</html>

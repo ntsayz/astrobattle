@@ -1,0 +1,198 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Player</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">astrobattle.Model.DynamicElement</a>
+</div>
+
+<h1>Coverage Summary for Class: Player (astrobattle.Model.DynamicElement)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Player</td>
+<td class="coverageStat">
+  <span class="percent">
+    62.5%
+  </span>
+  <span class="absValue">
+    (5/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    72.7%
+  </span>
+  <span class="absValue">
+    (8/11)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Player$MockitoMock$847722697</td>
+  </tr>
+  <tr>
+    <td class="name">Player$MockitoMock$847722697$auxiliary$2EESSp2J</td>
+  </tr>
+  <tr>
+    <td class="name">Player$MockitoMock$847722697$auxiliary$3tanyhax</td>
+  </tr>
+  <tr>
+    <td class="name">Player$MockitoMock$847722697$auxiliary$c5c9fl5V</td>
+  </tr>
+  <tr>
+    <td class="name">Player$MockitoMock$847722697$auxiliary$Gyn7PBux</td>
+  </tr>
+  <tr>
+    <td class="name">Player$MockitoMock$847722697$auxiliary$kCtd9mkw</td>
+  </tr>
+  <tr>
+    <td class="name">Player$MockitoMock$847722697$auxiliary$kr9VEErd</td>
+  </tr>
+  <tr>
+    <td class="name">Player$MockitoMock$847722697$auxiliary$nar3UcHQ</td>
+  </tr>
+  <tr>
+    <td class="name">Player$MockitoMock$847722697$auxiliary$oWESvg6t</td>
+  </tr>
+  <tr>
+    <td class="name">Player$MockitoMock$847722697$auxiliary$PYM95E2d</td>
+  </tr>
+  <tr>
+    <td class="name">Player$MockitoMock$847722697$auxiliary$Qex8h7Si</td>
+  </tr>
+  <tr>
+    <td class="name">Player$MockitoMock$847722697$auxiliary$rqpPWrM6</td>
+  </tr>
+  <tr>
+    <td class="name">Player$MockitoMock$847722697$auxiliary$Ve4v65zO</td>
+  </tr>
+  <tr>
+    <td class="name">Player$MockitoMock$847722697$auxiliary$WzVUaXB6</td>
+  </tr>
+  <tr>
+    <td class="name">Player$MockitoMock$847722697$auxiliary$xFdeZVYT</td>
+  </tr>
+  <tr>
+    <td class="name">Player$MockitoMock$847722697$auxiliary$z82bpwTf</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    62.5%
+  </span>
+  <span class="absValue">
+    (5/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    72.7%
+  </span>
+  <span class="absValue">
+    (8/11)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package astrobattle.Model.DynamicElement;
+&nbsp;import astrobattle.Model.Position;
+&nbsp;import astrobattle.Model.StaticElement.Asset;
+&nbsp;import astrobattle.View.Sprite.PlayerSprite;
+&nbsp;import com.googlecode.lanterna.graphics.TextGraphics;
+&nbsp;
+&nbsp;
+&nbsp;public class Player extends Ship implements  DynamicElement  {
+<b class="fc">&nbsp;    int health = 1000, score = 0;</b>
+<b class="fc">&nbsp;    boolean shoot = false;</b>
+<b class="fc">&nbsp;    PlayerSprite sprite = new PlayerSprite();</b>
+&nbsp;    public Player(int x, int y,int cols, int rows){
+<b class="fc">&nbsp;        super(x,y,cols,rows);</b>
+&nbsp;    }
+&nbsp;    @Override
+&nbsp;    public void update(TextGraphics graphics){
+<b class="nc">&nbsp;        sprite.draw(graphics,this);</b>
+&nbsp;    }
+&nbsp;    @Override
+&nbsp;    public void move(int direction){
+<b class="nc">&nbsp;        this.position.move(direction,shipSpeed.maxSpeed());</b>
+&nbsp;    }
+&nbsp;    public int getHealth(){
+<b class="fc">&nbsp;        return this.health;</b>
+&nbsp;    }
+&nbsp;    public void damage(int damage){
+<b class="fc">&nbsp;        health -=damage;</b>
+&nbsp;    }
+&nbsp;    public void increaseHealth(int powerup){
+<b class="nc">&nbsp;        this.health += powerup;</b>
+&nbsp;    }
+&nbsp;    public int getScore(){
+<b class="fc">&nbsp;        return score;</b>
+&nbsp;    }
+&nbsp;    @Override
+&nbsp;    public void increaseScore(int score){
+<b class="fc">&nbsp;        this.score+=score;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-23 18:51</div>
+</div>
+</body>
+</html>

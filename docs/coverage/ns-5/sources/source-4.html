@@ -1,0 +1,164 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Ship</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">astrobattle.Model.DynamicElement</a>
+</div>
+
+<h1>Coverage Summary for Class: Ship (astrobattle.Model.DynamicElement)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Ship</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    60%
+  </span>
+  <span class="absValue">
+    (6/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    69.2%
+  </span>
+  <span class="absValue">
+    (9/13)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package astrobattle.Model.DynamicElement;
+&nbsp;
+&nbsp;import astrobattle.Model.DynamicElement.Strategy.BulletBehavior;
+&nbsp;import astrobattle.Model.DynamicElement.Strategy.ShipSpeed;
+&nbsp;import astrobattle.Model.DynamicElement.Strategy.SlowShip;
+&nbsp;import astrobattle.Model.DynamicElement.Strategy.SlowStrongBullet;
+&nbsp;import astrobattle.Model.Element;
+&nbsp;import astrobattle.Model.Position;
+&nbsp;import astrobattle.Model.StaticElement.Asset;
+&nbsp;import com.googlecode.lanterna.graphics.TextGraphics;
+&nbsp;
+&nbsp;public abstract class Ship extends Element implements  DynamicElement {
+<b class="fc">&nbsp;    BulletBehavior bulletBehavior = new SlowStrongBullet();</b>
+<b class="fc">&nbsp;    ShipSpeed shipSpeed = new SlowShip();</b>
+&nbsp;    Position position;
+&nbsp;
+&nbsp;    Ship(int x, int y,int cols,int rows){
+<b class="fc">&nbsp;        super(x,y,cols,rows);</b>
+<b class="fc">&nbsp;        this.position = new Position(x,y,cols,rows);</b>
+&nbsp;    }
+<b class="nc">&nbsp;    public void increaseScore(int score){}</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void setPosition(Position position) {
+<b class="nc">&nbsp;        this.position = position;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setShipSpeed(ShipSpeed shipSpeed){
+<b class="fc">&nbsp;        this.shipSpeed = shipSpeed;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    public void update(TextGraphics graphics){
+&nbsp;
+<b class="nc">&nbsp;    }</b>
+&nbsp;    @Override
+&nbsp;    public Position getPosition() {
+<b class="fc">&nbsp;        return this.position;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int getColLen() {
+<b class="fc">&nbsp;        return super.getColLen();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int getRowLen() {
+<b class="fc">&nbsp;        return super.getRowLen();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void move(int direction){
+<b class="nc">&nbsp;        this.position.move(direction,shipSpeed.maxSpeed());</b>
+&nbsp;    }
+&nbsp;    @SuppressWarnings(&quot;NonOverridingEquals&quot;)
+&nbsp;    public boolean equals(Asset el) {
+<b class="fc">&nbsp;        return this.position.equals(el.getPosition());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-23 18:51</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,163 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > MenuView</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">astrobattle.View</a>
+</div>
+
+<h1>Coverage Summary for Class: MenuView (astrobattle.View)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MenuView</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    97%
+  </span>
+  <span class="absValue">
+    (32/33)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package astrobattle.View;
+&nbsp;
+&nbsp;import astrobattle.Controller.StateController;
+&nbsp;import astrobattle.Controller.Utilities.Window;
+&nbsp;import com.googlecode.lanterna.TerminalPosition;
+&nbsp;import com.googlecode.lanterna.TerminalSize;
+&nbsp;import com.googlecode.lanterna.TextColor;
+&nbsp;import com.googlecode.lanterna.graphics.TextGraphics;
+&nbsp;
+<b class="nc">&nbsp;public class MenuView implements View{</b>
+&nbsp;
+&nbsp;    public static void draw(TextGraphics graphics, int state) {
+<b class="fc">&nbsp;        String play = &quot;#766e6e&quot;, istr = &quot;#766e6e&quot;,exit = &quot;#766e6e&quot;, red =&quot;#f20c0c&quot;;</b>
+<b class="fc">&nbsp;        switch(state){</b>
+&nbsp;            case 0:
+<b class="fc">&nbsp;                play = red;</b>
+<b class="fc">&nbsp;            break;</b>
+&nbsp;            case 1:
+<b class="fc">&nbsp;                istr = red;</b>
+<b class="fc">&nbsp;            break;</b>
+&nbsp;            case 2:
+<b class="fc">&nbsp;                exit = red;</b>
+&nbsp;            break;
+&nbsp;        }
+<b class="fc">&nbsp;        drawLogo(graphics);</b>
+&nbsp;        // TODO : use Window instance to set rows
+<b class="fc">&nbsp;        graphics.setForegroundColor(TextColor.Factory.fromString(play));</b>
+<b class="fc">&nbsp;        graphics.putString(new TerminalPosition(Window.getCols()/2, 20), &quot;PLAY&quot;);</b>
+<b class="fc">&nbsp;        graphics.setForegroundColor(TextColor.Factory.fromString(istr));</b>
+<b class="fc">&nbsp;        graphics.putString(new TerminalPosition((Window.getCols()/2) -3, 30), &quot;INSTRUCTIONS&quot;);</b>
+<b class="fc">&nbsp;        graphics.setForegroundColor(TextColor.Factory.fromString(exit));</b>
+<b class="fc">&nbsp;        graphics.putString(new TerminalPosition(Window.getCols()/2, 40), &quot;EXIT&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        graphics.setForegroundColor(TextColor.Factory.fromString(&quot;#3e3837&quot;));</b>
+<b class="fc">&nbsp;        graphics.putString(new TerminalPosition(Window.getCols()-23 , Window.getRows()-3), &quot;[ARROW UP] Navigation&quot;);</b>
+<b class="fc">&nbsp;        graphics.putString(new TerminalPosition(Window.getCols()-23 , Window.getRows()-2), &quot;[ARROW DOWN] Navigation&quot;);</b>
+<b class="fc">&nbsp;        graphics.putString(new TerminalPosition(Window.getCols()-23 , Window.getRows()-1), &quot;[ENTER] Select&quot;);</b>
+&nbsp;
+&nbsp;    }
+&nbsp;    public static void drawLogo(TextGraphics graphics){
+&nbsp;        // A
+<b class="fc">&nbsp;        graphics.setForegroundColor(TextColor.Factory.fromString(&quot;#766e6e&quot;));</b>
+<b class="fc">&nbsp;        graphics.putString(new TerminalPosition(Window.getCols()/2 - 8, Window.getRows()-38), &quot;A S T R O&quot;);</b>
+<b class="fc">&nbsp;        graphics.fillRectangle(new TerminalPosition(68,5),new TerminalSize(3,6), &#39;|&#39;);</b>
+<b class="fc">&nbsp;        graphics.fillRectangle(new TerminalPosition(71,5),new TerminalSize(3,1), &#39;|&#39;);</b>
+<b class="fc">&nbsp;        graphics.fillRectangle(new TerminalPosition(74,5),new TerminalSize(3,6), &#39;|&#39;);</b>
+<b class="fc">&nbsp;        graphics.fillRectangle(new TerminalPosition(75,5),new TerminalSize(2,6), &#39;|&#39;);</b>
+<b class="fc">&nbsp;        graphics.fillRectangle(new TerminalPosition(71,8),new TerminalSize(4,1), &#39;|&#39;);</b>
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;        graphics.setForegroundColor(TextColor.Factory.fromString(&quot;#f20c0c&quot;));</b>
+<b class="fc">&nbsp;        graphics.putString(new TerminalPosition(Window.getCols()/2 + 3, Window.getRows()-38), &quot;B A T T L E&quot;);</b>
+<b class="fc">&nbsp;        graphics.fillRectangle(new TerminalPosition(78,5),new TerminalSize(9,1), &#39;|&#39;);</b>
+<b class="fc">&nbsp;        graphics.fillRectangle(new TerminalPosition(85,5),new TerminalSize(3,6), &#39;|&#39;);</b>
+<b class="fc">&nbsp;        graphics.fillRectangle(new TerminalPosition(78,5),new TerminalSize(3,6), &#39;|&#39;);</b>
+<b class="fc">&nbsp;        graphics.fillRectangle(new TerminalPosition(78,10),new TerminalSize(9,1), &#39;|&#39;);</b>
+<b class="fc">&nbsp;        graphics.fillRectangle(new TerminalPosition(78,7),new TerminalSize(9,1), &#39;|&#39;);</b>
+&nbsp;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-23 18:51</div>
+</div>
+</body>
+</html>

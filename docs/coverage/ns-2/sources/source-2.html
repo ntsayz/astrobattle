@@ -1,0 +1,357 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > ElementController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">astrobattle.Controller</a>
+</div>
+
+<h1>Coverage Summary for Class: ElementController (astrobattle.Controller)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ElementController</td>
+<td class="coverageStat">
+  <span class="percent">
+    94.7%
+  </span>
+  <span class="absValue">
+    (18/19)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75.2%
+  </span>
+  <span class="absValue">
+    (94/125)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ElementController$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    90%
+  </span>
+  <span class="absValue">
+    (18/20)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    74.6%
+  </span>
+  <span class="absValue">
+    (94/126)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package astrobattle.Controller;
+&nbsp;
+&nbsp;import astrobattle.Controller.Utilities.Window;
+&nbsp;import astrobattle.Model.DynamicElement.Bullet;
+&nbsp;import astrobattle.Model.DynamicElement.Enemy;
+&nbsp;import astrobattle.Model.DynamicElement.Player;
+&nbsp;import astrobattle.Model.DynamicElement.Ship;
+&nbsp;import astrobattle.Model.DynamicElement.Strategy.SuperSlowShip;
+&nbsp;import astrobattle.Model.Position;
+&nbsp;import astrobattle.Model.StaticElement.Asset;
+&nbsp;import astrobattle.Model.StaticElement.Coin;
+&nbsp;
+&nbsp;
+&nbsp;import astrobattle.Model.StaticElement.PowerUp;
+&nbsp;import astrobattle.View.LostView;
+&nbsp;import astrobattle.View.PlayingView;
+&nbsp;import com.googlecode.lanterna.graphics.TextGraphics;
+&nbsp;import com.googlecode.lanterna.input.KeyStroke;
+&nbsp;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Random;
+&nbsp;
+&nbsp;public class ElementController {
+&nbsp;    Player player;
+&nbsp;    Bullet playerBullet, enemyBullet;
+<b class="fc">&nbsp;    int dir = 3;</b>
+<b class="fc">&nbsp;    boolean lost= false;</b>
+<b class="fc">&nbsp;    int posY1 = 30;</b>
+<b class="fc">&nbsp;    int posY2 = 40;</b>
+<b class="fc">&nbsp;    int winCols =  Window.getCols();</b>
+<b class="fc">&nbsp;    int winRows = Window.getRows();</b>
+<b class="fc">&nbsp;    Position middle = new Position(winCols/2,winRows-posY1);</b>
+<b class="fc">&nbsp;    Position middleUp = new Position(winCols/2,winRows-posY2);</b>
+<b class="fc">&nbsp;    Position left = new Position(4,winRows-posY1);</b>
+<b class="fc">&nbsp;    Position leftUp = new Position(4,winRows-posY2);</b>
+<b class="fc">&nbsp;    Position right = new Position(winCols,winRows-posY1);</b>
+<b class="fc">&nbsp;    Position rightUp = new Position(winCols,winRows-posY2);</b>
+&nbsp;    ArrayList&lt;Enemy&gt; enemies, copyEnemies;
+&nbsp;    ArrayList&lt;Asset&gt; assets, copyAssets;
+<b class="fc">&nbsp;    Random random = new Random();</b>
+<b class="fc">&nbsp;    boolean addpower = false;</b>
+<b class="fc">&nbsp;    int bound = 6 ;</b>
+&nbsp;
+<b class="fc">&nbsp;    public ElementController(){</b>
+<b class="fc">&nbsp;        player = new Player(Window.getCols()/2 +3,Window.getRows()/2,4,4);</b>
+<b class="fc">&nbsp;        playerBullet = new Bullet(0,0,2,2);</b>
+<b class="fc">&nbsp;        enemyBullet = new Bullet(0,0,2,2);</b>
+<b class="fc">&nbsp;        enemies = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        assets = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        copyEnemies = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        copyAssets = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        generateAssets();</b>
+&nbsp;    }
+&nbsp;    public int manager(TextGraphics graphics, KeyStroke key) throws InterruptedException {
+<b class="fc">&nbsp;        int code = processKey(key);</b>
+<b class="fc">&nbsp;        PlayingView.draw(graphics,player,enemies);</b>
+<b class="fc">&nbsp;        player.move(0);</b>
+<b class="fc">&nbsp;        enemyManager(graphics,bound);</b>
+<b class="fc">&nbsp;        assetManager(graphics);</b>
+<b class="fc">&nbsp;        player.update(graphics);</b>
+<b class="fc">&nbsp;        playerBullet.drawPlayer(graphics,player.getPosition());</b>
+<b class="fc">&nbsp;        if(player.getPosition().equals(enemyBullet.getPosition())){</b>
+<b class="fc">&nbsp;            player.damage(enemyBullet.getPower());</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if(player.getHealth()/100 == 0){</b>
+<b class="fc">&nbsp;            LostView.draw(graphics);</b>
+<b class="fc">&nbsp;            code = 1;</b>
+<b class="fc">&nbsp;            lost = true;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return code;</b>
+&nbsp;    }
+&nbsp;    public int processKey(KeyStroke key){
+<b class="fc">&nbsp;        if(key == null)return 6;</b>
+<b class="nc">&nbsp;        player.move(0);</b>
+<b class="nc">&nbsp;        switch (key.getKeyType()){</b>
+<b class="nc">&nbsp;            case Escape : return 1;</b>
+<b class="nc">&nbsp;            case ArrowUp :player.move(1);break;</b>
+<b class="nc">&nbsp;            case ArrowDown : player.move(2);break;</b>
+<b class="nc">&nbsp;            case ArrowLeft :player.move(3);break;</b>
+<b class="nc">&nbsp;            case ArrowRight :player.move(4);break;</b>
+<b class="nc">&nbsp;            case Tab :playerBullet.go();break;</b>
+<b class="nc">&nbsp;            case Enter : playerBullet.changeShootingBehaviour();break;</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                return 10;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return 0;</b>
+&nbsp;    }
+&nbsp;    void generateAssets(){
+<b class="fc">&nbsp;        Enemy en = new Enemy(winCols/2,winRows -posY1,4,4);</b>
+<b class="fc">&nbsp;        Enemy en1 = new Enemy(winCols/2,winRows -posY2,4,4);</b>
+<b class="fc">&nbsp;        en.setShipSpeed(new SuperSlowShip());</b>
+<b class="fc">&nbsp;        en1.setShipSpeed(new SuperSlowShip());</b>
+<b class="fc">&nbsp;        enemies.add(en1);</b>
+<b class="fc">&nbsp;        enemies.add(en);</b>
+<b class="fc">&nbsp;        for(int i = 0; i &lt; 7 ; i++){</b>
+<b class="fc">&nbsp;            addCoin();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    public void assetManager(TextGraphics graphics){
+<b class="fc">&nbsp;        retrieveAssets(bound);</b>
+<b class="fc">&nbsp;        for(Asset coin: assets){</b>
+<b class="fc">&nbsp;            coin.update(graphics);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;    }
+&nbsp;    public void check(){
+<b class="fc">&nbsp;        if(lost){</b>
+<b class="nc">&nbsp;            reset();</b>
+<b class="nc">&nbsp;            lost = false;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    public void retrieveAssets(int bound) {
+<b class="fc">&nbsp;        copyAssets = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        for (Asset asset : assets) {</b>
+<b class="fc">&nbsp;            if (this.player.equals(asset)) {</b>
+<b class="fc">&nbsp;                if(asset instanceof PowerUp){</b>
+<b class="nc">&nbsp;                    player.increaseHealth(50);</b>
+&nbsp;                }else {
+<b class="fc">&nbsp;                    player.increaseScore(1);</b>
+&nbsp;                }
+<b class="fc">&nbsp;                copyAssets.add(asset);</b>
+<b class="fc">&nbsp;                if(random.nextInt(bound) ==1 || assets.size() ==2){</b>
+<b class="fc">&nbsp;                    addCoin();</b>
+&nbsp;                }
+&nbsp;                break;
+&nbsp;            }
+<b class="fc">&nbsp;            if(player.getHealth() &lt; 500 &amp;&amp; enemies.size()==2){</b>
+<b class="nc">&nbsp;                addpower = true;</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        assets.removeAll(copyAssets);</b>
+<b class="fc">&nbsp;        copyAssets.clear();</b>
+<b class="fc">&nbsp;        if(addpower){</b>
+<b class="nc">&nbsp;            if(random.nextInt(1000) ==1 &amp;&amp; assets.size() &lt; 6){</b>
+<b class="nc">&nbsp;                addPowerUp();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            addpower = false;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if(random.nextInt(10000000) ==1 &amp;&amp; assets.size()  &lt; 4){</b>
+<b class="nc">&nbsp;            addCoin();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    private void addCoin(){
+<b class="fc">&nbsp;        assets.add(new Coin(random.nextInt(150 - 2) + 1, random.nextInt(50 - 2) + 1,1,1));</b>
+&nbsp;    }
+&nbsp;    private void addPowerUp(){
+<b class="nc">&nbsp;        assets.add(new PowerUp(random.nextInt(150 - 2) + 1, random.nextInt(50 - 2) + 1,1,1));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    private void enemyManager(TextGraphics graphics, int bound){// Higher makes it less likely
+&nbsp;
+<b class="fc">&nbsp;        for(Enemy enemy: enemies){</b>
+<b class="fc">&nbsp;            enemy.update(graphics);</b>
+<b class="fc">&nbsp;            if(random.nextInt(bound) ==1){</b>
+<b class="fc">&nbsp;                enemyBullet.drawEnemy(graphics,enemy.getPosition());</b>
+<b class="fc">&nbsp;            }if(playerBullet.getPosition().equals(enemy.getPosition())){</b>
+<b class="fc">&nbsp;                enemy.damage(50); // playerbulletgetpower();</b>
+<b class="fc">&nbsp;                player.increaseScore(10);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if(enemy.getHealth()/100 == 0){</b>
+<b class="fc">&nbsp;                copyEnemies.add(enemy);</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        enemies.removeAll(copyEnemies);</b>
+<b class="fc">&nbsp;        copyEnemies.clear();</b>
+<b class="fc">&nbsp;        moveEnemies();</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    private void moveEnemies(){
+<b class="fc">&nbsp;        for (Ship enemy: enemies) {</b>
+<b class="nc">&nbsp;            if(enemy.getPosition().equals(middle) || enemy.getPosition().equals(right)){</b>
+<b class="nc">&nbsp;                dir = 3;</b>
+<b class="nc">&nbsp;            } else if (enemy.getPosition().equals(left)) {</b>
+<b class="nc">&nbsp;                dir =4;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if(enemy.getPosition().equals(middleUp) || enemy.getPosition().equals(leftUp) ){</b>
+<b class="nc">&nbsp;                dir = 4;</b>
+<b class="nc">&nbsp;            } else if (enemy.getPosition().equals(rightUp)) {</b>
+<b class="nc">&nbsp;                dir =3;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            if(random.nextInt(10) ==1){</b>
+<b class="nc">&nbsp;                enemy.move(dir);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;    public void reset(){
+<b class="fc">&nbsp;        player = new Player(Window.getCols()/2+3,Window.getRows()/2,4,4);</b>
+<b class="fc">&nbsp;        playerBullet = new Bullet(0,0,2,2);</b>
+<b class="fc">&nbsp;        enemyBullet = new Bullet(0,0,2,2);</b>
+<b class="fc">&nbsp;        enemies = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        assets = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        generateAssets();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Player getPlayer() {
+<b class="fc">&nbsp;        return player;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setPlayer(Player player) {
+<b class="fc">&nbsp;        this.player = player;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ArrayList&lt;Asset&gt; getAssets() {
+<b class="fc">&nbsp;        return assets;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setAssets(ArrayList&lt;Asset&gt; assets) {
+<b class="fc">&nbsp;        this.assets = assets;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setPlayerBullet(Bullet playerBullet) {
+<b class="fc">&nbsp;        this.playerBullet = playerBullet;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setEnemyBullet(Bullet enemyBullet) {
+<b class="fc">&nbsp;        this.enemyBullet = enemyBullet;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setEnemies(ArrayList&lt;Enemy&gt; enemies) {
+<b class="fc">&nbsp;        this.enemies = enemies;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-23 18:51</div>
+</div>
+</body>
+</html>

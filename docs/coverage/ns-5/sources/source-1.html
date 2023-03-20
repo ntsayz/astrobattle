@@ -1,0 +1,237 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Bullet</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">astrobattle.Model.DynamicElement</a>
+</div>
+
+<h1>Coverage Summary for Class: Bullet (astrobattle.Model.DynamicElement)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Bullet</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (6/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    37.1%
+  </span>
+  <span class="absValue">
+    (13/35)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Bullet$MockitoMock$1910349147</td>
+  </tr>
+  <tr>
+    <td class="name">Bullet$MockitoMock$1910349147$auxiliary$0Hm5XD0v</td>
+  </tr>
+  <tr>
+    <td class="name">Bullet$MockitoMock$1910349147$auxiliary$8NE8BLQ5</td>
+  </tr>
+  <tr>
+    <td class="name">Bullet$MockitoMock$1910349147$auxiliary$A7Ck4G0S</td>
+  </tr>
+  <tr>
+    <td class="name">Bullet$MockitoMock$1910349147$auxiliary$cBVnouvT</td>
+  </tr>
+  <tr>
+    <td class="name">Bullet$MockitoMock$1910349147$auxiliary$Cmbdng6k</td>
+  </tr>
+  <tr>
+    <td class="name">Bullet$MockitoMock$1910349147$auxiliary$dAJxtJYN</td>
+  </tr>
+  <tr>
+    <td class="name">Bullet$MockitoMock$1910349147$auxiliary$DL5dTxzB</td>
+  </tr>
+  <tr>
+    <td class="name">Bullet$MockitoMock$1910349147$auxiliary$IkrVRnwB</td>
+  </tr>
+  <tr>
+    <td class="name">Bullet$MockitoMock$1910349147$auxiliary$O22FYD9C</td>
+  </tr>
+  <tr>
+    <td class="name">Bullet$MockitoMock$1910349147$auxiliary$R4QDCGOe</td>
+  </tr>
+  <tr>
+    <td class="name">Bullet$MockitoMock$1910349147$auxiliary$SebXG7On</td>
+  </tr>
+  <tr>
+    <td class="name">Bullet$MockitoMock$1910349147$auxiliary$u4oCFRml</td>
+  </tr>
+  <tr>
+    <td class="name">Bullet$MockitoMock$1910349147$auxiliary$vkDFNcip</td>
+  </tr>
+  <tr>
+    <td class="name">Bullet$MockitoMock$1910349147$auxiliary$XOyFjtLo</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (6/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    37.1%
+  </span>
+  <span class="absValue">
+    (13/35)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package astrobattle.Model.DynamicElement;
+&nbsp;
+&nbsp;import astrobattle.Controller.Utilities.Window;
+&nbsp;import astrobattle.Model.DynamicElement.Strategy.BulletBehavior;
+&nbsp;import astrobattle.Model.DynamicElement.Strategy.FastWeakBullet;
+&nbsp;import astrobattle.Model.DynamicElement.Strategy.SlowStrongBullet;
+&nbsp;import astrobattle.Model.Element;
+&nbsp;import astrobattle.Model.Position;
+&nbsp;import astrobattle.View.Sprite.BulletSprite;
+&nbsp;import com.googlecode.lanterna.graphics.TextGraphics;
+&nbsp;
+&nbsp;import java.util.Random;
+&nbsp;
+&nbsp;public class Bullet extends Element implements DynamicElement {
+<b class="fc">&nbsp;    Random random = new Random();</b>
+<b class="fc">&nbsp;    BulletSprite bulletSprite = new BulletSprite();</b>
+<b class="fc">&nbsp;    BulletBehavior bulletBehavior = new SlowStrongBullet();</b>
+&nbsp;
+<b class="fc">&nbsp;    int power = 2, j = 0, i = 0;</b>
+<b class="fc">&nbsp;    boolean drawPlayer = false;</b>
+&nbsp;
+&nbsp;    public int getSpeed() {
+<b class="fc">&nbsp;        return bulletBehavior.speed();</b>
+&nbsp;    }
+<b class="fc">&nbsp;    int speed = 2;</b>
+&nbsp;    public Bullet(int x, int y, int cols, int rows) {
+<b class="fc">&nbsp;        super(x, y, cols, rows);</b>
+&nbsp;    }
+&nbsp;    public int getPower() {
+<b class="fc">&nbsp;        return bulletBehavior.strength();</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void drawPlayer(TextGraphics graphics,Position elementPos){
+<b class="nc">&nbsp;        if(!drawPlayer)return;</b>
+<b class="nc">&nbsp;        if(j == 0){</b>
+<b class="nc">&nbsp;            i  = elementPos.getY();</b>
+<b class="nc">&nbsp;            j = elementPos.getX() + 1;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        bulletSprite.draw(graphics,j,i);</b>
+<b class="nc">&nbsp;        this.setPosition(new Position(j,i));</b>
+<b class="nc">&nbsp;        if(random.nextInt(getSpeed()) == 1){</b>
+<b class="nc">&nbsp;            i--;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if(i == 0){</b>
+<b class="nc">&nbsp;            drawPlayer = false;</b>
+<b class="nc">&nbsp;            j = 0;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    public void drawEnemy(TextGraphics graphics,Position elementPos){
+<b class="nc">&nbsp;        if(j == 0){</b>
+<b class="nc">&nbsp;            i  = elementPos.getY();</b>
+<b class="nc">&nbsp;            j = elementPos.getX() + 1;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        bulletSprite.draw(graphics,j,i);</b>
+<b class="nc">&nbsp;        this.setPosition(new Position(j,i));</b>
+<b class="nc">&nbsp;        if(random.nextInt(getSpeed()) == 1){</b>
+<b class="nc">&nbsp;            i++;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if(i == Window.getRows()-1){</b>
+<b class="nc">&nbsp;            j = 0;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    public void go(){
+<b class="nc">&nbsp;        drawPlayer = true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public BulletBehavior getBulletBehavior() {
+<b class="fc">&nbsp;        return bulletBehavior;</b>
+&nbsp;    }
+&nbsp;    public void changeShootingBehaviour(){
+<b class="fc">&nbsp;        if( getBulletBehavior() instanceof FastWeakBullet){</b>
+<b class="fc">&nbsp;            setBulletBehavior(new SlowStrongBullet());</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        setBulletBehavior(new FastWeakBullet());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setBulletBehavior(BulletBehavior bulletBehavior) {
+<b class="fc">&nbsp;        this.bulletBehavior = bulletBehavior;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-23 18:51</div>
+</div>
+</body>
+</html>
